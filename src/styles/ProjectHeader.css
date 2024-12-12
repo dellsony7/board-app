@@ -1,0 +1,84 @@
+.projectHeader {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+}
+
+.headerTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.projectTitle {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.projectCategory {
+  font-size: 18px;
+  color: #555;
+  margin-top: 10px;
+}
+
+.assignedMembersSection {
+  margin-top: 20px;
+}
+
+.assignedLabel {
+  font-size: 16px;
+  color: #333;
+}
+
+.assignedMembers {
+  display: flex;
+  gap: 10px;
+}
+
+.memberName {
+  width: 50px;
+  height: 50px;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+}
+
+.extraMembers {
+  display: flex;
+  align-items: center;
+}
+
+.infoIcon {
+  width: 20px;
+  height: 20px;
+  background-color: #2196f3;
+  border-radius: 50%;
+}
+
+.extraMembersCount {
+  font-size: 14px;
+  color: #2196f3;
+}
+
+.manageSection {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.manageLabel {
+  font-size: 16px;
+  color: #333;
+}
+
+.lastUpdatedSection {
+  margin-top: 20px;
+}
+
+.lastUpdated {
+  font-size: 14px;
+  color: #999;
+}
