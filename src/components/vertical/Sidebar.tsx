@@ -12,11 +12,10 @@ const Sidebar: React.FC = () => {
         color: "white",
         height: "100vh",
         position: "fixed",
-        top: 64, 
+        top: 64,
       }}
     >
       <List>
-
         <ListItem component="button" sx={{ cursor: "pointer" }}>
           <ListItemIcon>
             <DashboardIcon style={{ color: "white" }} />
@@ -24,7 +23,6 @@ const Sidebar: React.FC = () => {
           <ListItemText primary="Dashboard" />
         </ListItem>
 
-      
         <ListItem component="button" sx={{ cursor: "pointer" }}>
           <ListItemIcon>
             <SettingsIcon style={{ color: "white" }} />

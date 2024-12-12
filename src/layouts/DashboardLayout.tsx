@@ -25,7 +25,9 @@ import {
 } from "@toolpad/core/Account";
 import type { Navigation, Router, Session } from "@toolpad/core/AppProvider";
 import Button from "@mui/material/Button";
-import { LogoutOutlined } from "@mui/icons-material";
+import { Info, LogoutOutlined } from "@mui/icons-material";
+import ProjectHeader from "../components/ProjectHeader";
+import ProjectCards from "../components/grid/ProjectCards";
 
 const NAVIGATION: Navigation = [
   {
@@ -64,73 +66,48 @@ function DemoPageContent({ pathname }: { pathname: string }) {
   return (
     <Box
       sx={{
-        py: 4,
+        py: 0,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         textAlign: "center",
+        boxShadow: "none"
       }}
     >
+      <ProjectHeader />
+      <ProjectCards/>
       <Typography>Dashboard content for {pathname}</Typography>
     </Box>
   );
 }
-function AccountSidebarPreview(props: AccountPreviewProps & { mini: boolean }) {
-  const { handleClick, open, mini } = props;
+
+function SidebarFooterAccount() {
   return (
-    <Stack direction="column" p={0} overflow="hidden">
-      <Divider />
-      <AccountPreview
-        variant={mini ? "condensed" : "expanded"}
-        handleClick={handleClick}
-        open={open}
-      />
-    </Stack>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 0,
+        alignItems: "center",
+        width: "100%",
+      }}
+    >
+      <Button href="#text-buttons" fullWidth startIcon={<Info />}>
+        support
+      </Button>
+      <Button
+        component="label"
+        variant="contained"
+        startIcon={<LogoutOutlined />}
+        fullWidth
+      >
+        Logout
+      </Button>
+    </Box>
   );
 }
 
-const accounts = [
-  {
-    id: 1,
-    name: "Dellsony Dissanayaka",
-    email: "eng.dellsony@gmail.com",
-    image: "",
-    projects: [
-      {
-        id: 3,
-        title: "Project X",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Dellsony",
-    email: "dellsony@example.com",
-    color: "#8B4513",
-    projects: [{ id: 4, title: "Project A" }],
-  },
-];
-
-
-  function SidebarFooterAccount() {
-    return (
-      <>
-      
-        <Button
-          component="label"
-          variant="contained"
-          tabIndex={-1}
-          startIcon={<LogoutOutlined />}
-        >
-          Logout
-        </Button>
-      </>
-    );
-  }
-
-export default function DashboardLayoutAccountSidebar() {
-
-
+export default function DashboardLayouts() {
   const [pathname, setPathname] = React.useState("/dashboard");
 
   const router = React.useMemo<Router>(() => {
@@ -141,14 +118,8 @@ export default function DashboardLayoutAccountSidebar() {
     };
   }, [pathname]);
 
-
-
   return (
-    <AppProvider
-      navigation={NAVIGATION}
-      router={router}
-      theme={demoTheme}
-    >
+    <AppProvider navigation={NAVIGATION} router={router} theme={demoTheme}>
       <DashboardLayout
         slots={{
           toolbarAccount: () => null,
