@@ -10,9 +10,11 @@ import { Info, LogoutOutlined } from "@mui/icons-material";
 import ProjectHeader from "../components/ProjectHeader";
 import ProjectCards from "../components/grid/ProjectCards";
 import SportsXi from "../pages/SportsXi";
-import { IconButton, Stack, TextField, Tooltip } from "@mui/material";
+import { Avatar, IconButton, Stack, TextField, Tooltip } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-
+import AddIcon from "@mui/icons-material/Add";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import TuneIcon from "@mui/icons-material/Tune";
 const NAVIGATION: Navigation = [
   {
     kind: "header",
@@ -150,7 +152,10 @@ function SidebarFooterAccount() {
 
 function ToolbarActionsSearch() {
   return (
-    <Stack direction="row">
+    <Stack direction="row" spacing={2}>
+      <Button variant="contained" endIcon={<AddIcon />}>
+        Create new board
+      </Button>
       <Tooltip title="Search" enterDelay={1000}>
         <div>
           <IconButton
@@ -180,6 +185,9 @@ function ToolbarActionsSearch() {
         }}
         sx={{ display: { xs: "none", md: "inline-block" }, mr: 1 }}
       />
+      <TuneIcon />
+      <NotificationsIcon />
+      <Avatar />
     </Stack>
   );
 }
