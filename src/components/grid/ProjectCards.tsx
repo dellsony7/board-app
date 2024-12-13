@@ -28,35 +28,31 @@ interface Task {
   dueDate: string;
   linked: string;
   image: Image[];
+  color: string;
 }
-
-
 
 interface GroupedTasks {
   [key: string]: Task[];
 }
 
 export default function AutoGrid() {
-  const [tasks, setTasks] = React.useState<Task[]>([]); // State for raw tasks
-  const [groupedTasks, setGroupedTasks] = React.useState<GroupedTasks>({}); // State for grouped tasks
-
-  // Fetch data and group tasks by status
+  const [tasks, setTasks] = React.useState<Task[]>([]);
+  const [groupedTasks, setGroupedTasks] = React.useState<GroupedTasks>({});
   React.useEffect(() => {
     axios
-      .get("/fake-db/tasks.json") // Adjust the URL if necessary
+      .get("/fake-db/tasks.json")
       .then((response) => {
         const fetchedTasks: Task[] = response.data;
 
-        // Group tasks by their status
         const grouped = fetchedTasks.reduce((acc: GroupedTasks, task: Task) => {
           if (!acc[task.status]) {
             acc[task.status] = [];
           }
-          acc[task.status].push(task); // Add the whole task, not just title and id
+          acc[task.status].push(task); 
           return acc;
         }, {});
 
-        setGroupedTasks(grouped); // Set grouped tasks
+        setGroupedTasks(grouped); 
       })
       .catch((error) => {
         console.error("Error fetching data:", error);

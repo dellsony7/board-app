@@ -1,33 +1,17 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
-import MenuList from "@mui/material/MenuList";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Avatar from "@mui/material/Avatar";
-import Divider from "@mui/material/Divider";
 import { createTheme } from "@mui/material/styles";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { AppProvider } from "@toolpad/core/AppProvider";
-import {
-  DashboardLayout,
-  SidebarFooterProps,
-} from "@toolpad/core/DashboardLayout";
-import {
-  Account,
-  AccountPreview,
-  AccountPopoverFooter,
-  SignOutButton,
-  AccountPreviewProps,
-} from "@toolpad/core/Account";
-import type { Navigation, Router, Session } from "@toolpad/core/AppProvider";
+import { AppProvider, Navigation, Router } from "@toolpad/core/AppProvider";
+import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import Button from "@mui/material/Button";
 import { Info, LogoutOutlined } from "@mui/icons-material";
 import ProjectHeader from "../components/ProjectHeader";
 import ProjectCards from "../components/grid/ProjectCards";
+import SportsXi from "../pages/SportsXi";
+import { IconButton, Stack, TextField, Tooltip } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 const NAVIGATION: Navigation = [
   {
@@ -50,11 +34,15 @@ const NAVIGATION: Navigation = [
       },
       {
         title: "Development React App",
-        segment: "react-app",
+        segment: "ReactApplication",
       },
       {
         title: "Sport Xi Project",
-        segment: "Wordpress theme",
+        segment: "sport-xi",
+      },
+      {
+        title: "Wordpress theme",
+        segment: "wordpress-theme",
       },
     ],
   },
@@ -62,11 +50,10 @@ const NAVIGATION: Navigation = [
     segment: "messages",
     title: "Messages",
     icon: <ShoppingCartIcon />,
-
   },
   {
     segment: "calender",
-    title: "Calender",
+    title: "Calendar",
     icon: <ShoppingCartIcon />,
   },
   {
@@ -76,7 +63,7 @@ const NAVIGATION: Navigation = [
   },
 ];
 
-const demoTheme = createTheme({
+const theme = createTheme({
   cssVariables: {
     colorSchemeSelector: "data-toolpad-color-scheme",
   },
@@ -93,22 +80,46 @@ const demoTheme = createTheme({
 });
 
 function DemoPageContent({ pathname }: { pathname: string }) {
-  return (
-    <Box
-      sx={{
-        py: 0,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
-        boxShadow: "none"
-      }}
-    >
-      <ProjectHeader />
-      <ProjectCards/>
-      <Typography>Dashboard content for {pathname}</Typography>
-    </Box>
-  );
+  console.log("Current Pathname:", pathname); // Debug the pathname
+
+  if (pathname.startsWith("/dashboard")) {
+    switch (pathname) {
+      case "/dashboard":
+        return (
+          <Box
+            sx={{
+              py: 0,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center",
+            }}
+          >
+            <ProjectHeader />
+            <ProjectCards />
+          </Box>
+        );
+      case "/boards/sport-xi":
+        return (
+          <Box sx={{ py: 0 }}>
+            <SportsXi />
+          </Box>
+        );
+      default:
+        return <Box>Page Not Found</Box>;
+    }
+  }
+
+  switch (pathname) {
+    case "/messages":
+      return <Box>Messages Content</Box>;
+    case "/team-members":
+      return <Box>Team Members Content</Box>;
+    case "/calender":
+      return <Box>Calendar Content</Box>;
+    default:
+      return <Box>Page Not Found</Box>;
+  }
 }
 
 function SidebarFooterAccount() {
@@ -137,6 +148,42 @@ function SidebarFooterAccount() {
   );
 }
 
+function ToolbarActionsSearch() {
+  return (
+    <Stack direction="row">
+      <Tooltip title="Search" enterDelay={1000}>
+        <div>
+          <IconButton
+            type="button"
+            aria-label="search"
+            sx={{
+              display: { xs: "inline", md: "none" },
+            }}
+          >
+            <SearchIcon />
+          </IconButton>
+        </div>
+      </Tooltip>
+      <TextField
+        label="Search"
+        variant="outlined"
+        size="small"
+        slotProps={{
+          input: {
+            endAdornment: (
+              <IconButton type="button" aria-label="search" size="small">
+                <SearchIcon />
+              </IconButton>
+            ),
+            sx: { pr: 0.5 },
+          },
+        }}
+        sx={{ display: { xs: "none", md: "inline-block" }, mr: 1 }}
+      />
+    </Stack>
+  );
+}
+
 export default function DashboardLayouts() {
   const [pathname, setPathname] = React.useState("/dashboard");
 
@@ -149,11 +196,20 @@ export default function DashboardLayouts() {
   }, [pathname]);
 
   return (
-    <AppProvider navigation={NAVIGATION} router={router} theme={demoTheme}>
+    <AppProvider
+      navigation={NAVIGATION}
+      branding={{
+        logo: <img src="/Frame.png" alt="swimline-dellsony" />,
+        title: "Board App",
+      }}
+      router={router}
+      theme={theme}
+    >
       <DashboardLayout
         slots={{
           toolbarAccount: () => null,
           sidebarFooter: SidebarFooterAccount,
+          toolbarActions: ToolbarActionsSearch,
         }}
       >
         <DemoPageContent pathname={pathname} />
