@@ -1,0 +1,140 @@
+.card-component {
+  width: 236px;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.card-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.category {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.category-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #0000FF;
+  border-radius: 50%;
+}
+
+.more-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.assigned-users {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.user-images {
+  display: flex;
+  position: relative;
+  width: 58px;
+  height: 20px;
+}
+
+.user-image {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  overflow: hidden;
+  border: 1px solid #353945;
+}
+
+.additional-users {
+  position: absolute;
+  left: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 20px;
+}
+
+.additional-users span {
+  font-weight: 600;
+  font-size: 9px;
+  color: #353945;
+  text-align: center;
+  line-height: 16px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background-color: #f4f5f6;
+  border-radius: 5px;
+}
+
+.status img {
+  width: 12px;
+  height: 12px;
+}
+
+.status span {
+  font-weight: 500;
+  font-size: 8px;
+  line-height: 12px;
+  color: #b1b5c3;
+}
+
+.image-placeholder {
+  width: 234px;
+  height: 90px;
+  background-color: #3C3F48;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.placeholder-image {
+  width: 24px;
+  height: 24px;
+}
+
+.footer-bar {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.message-container,
+.calendar-container {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.icon {
+  margin-top: 1px;
+}
+
+.count,
+.due-date {
+  font-weight: 500;
+  font-size: 12px;
+  color: #777E90;
+}
+
