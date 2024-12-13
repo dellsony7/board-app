@@ -15,6 +15,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import TuneIcon from "@mui/icons-material/Tune";
+import FolderIcon from "@mui/icons-material/Folder";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import EditCalendarIcon from "@mui/icons-material/EditCalendar";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+
 const NAVIGATION: Navigation = [
   {
     kind: "header",
@@ -28,7 +33,7 @@ const NAVIGATION: Navigation = [
   {
     segment: "boards",
     title: "Boards",
-    icon: <ShoppingCartIcon />,
+    icon: <FolderIcon />,
     children: [
       {
         title: "Create routes",
@@ -51,17 +56,17 @@ const NAVIGATION: Navigation = [
   {
     segment: "messages",
     title: "Messages",
-    icon: <ShoppingCartIcon />,
+    icon: <ChatBubbleOutlineIcon />,
   },
   {
     segment: "calender",
     title: "Calendar",
-    icon: <ShoppingCartIcon />,
+    icon: <EditCalendarIcon />,
   },
   {
     segment: "team-members",
     title: "Team Members",
-    icon: <ShoppingCartIcon />,
+    icon: <PeopleAltIcon />,
   },
 ];
 
