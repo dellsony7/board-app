@@ -40,8 +40,38 @@ const NAVIGATION: Navigation = [
     icon: <DashboardIcon />,
   },
   {
-    segment: "orders",
-    title: "Orders",
+    segment: "boards",
+    title: "Boards",
+    icon: <ShoppingCartIcon />,
+    children: [
+      {
+        title: "Create routes",
+        segment: "create-routes",
+      },
+      {
+        title: "Development React App",
+        segment: "react-app",
+      },
+      {
+        title: "Sport Xi Project",
+        segment: "Wordpress theme",
+      },
+    ],
+  },
+  {
+    segment: "messages",
+    title: "Messages",
+    icon: <ShoppingCartIcon />,
+
+  },
+  {
+    segment: "calender",
+    title: "Calender",
+    icon: <ShoppingCartIcon />,
+  },
+  {
+    segment: "team-members",
+    title: "Team Members",
     icon: <ShoppingCartIcon />,
   },
 ];
