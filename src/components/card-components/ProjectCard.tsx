@@ -1,15 +1,18 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  CardMedia,
+} from "@mui/material";
 import axios from "axios";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd"; // Updated import
 
 import CardBody from "../card-components/CardBody";
 import CardFooter from "../card-components/CardFooter";
 import CardHeader from "../grid/CardHeader";
-import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 
 interface AssignedPerson {
   name: string;
@@ -20,6 +23,7 @@ interface Image {
   alt: string;
   src: string;
 }
+
 interface Task {
   id: number;
   title: string;
@@ -37,15 +41,16 @@ interface GroupedTasks {
   [key: string]: Task[];
 }
 
-export default function ProjectCard() {
-  const [tasks, setTasks] = React.useState<Task[]>([]);
+export default function AutoGrid() {
   const [groupedTasks, setGroupedTasks] = React.useState<GroupedTasks>({});
+
   React.useEffect(() => {
     axios
       .get("/fake-db/tasks.json")
       .then((response) => {
         const fetchedTasks: Task[] = response.data;
 
+        // Group tasks by status
         const grouped = fetchedTasks.reduce((acc: GroupedTasks, task: Task) => {
           if (!acc[task.status]) {
             acc[task.status] = [];
@@ -61,11 +66,12 @@ export default function ProjectCard() {
       });
   }, []);
 
+  // Handle the drag end event
   const handleDragEnd = (result: any) => {
     const { destination, source } = result;
     if (!destination) return;
 
-    // If the task is dropped in the same position, no need to change anything
+    // If the item is dropped in the same position, no need to do anything
     if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
@@ -73,15 +79,15 @@ export default function ProjectCard() {
       return;
     }
 
-    // Reorder tasks in the specific category (status)
     const sourceCategory = source.droppableId;
     const destinationCategory = destination.droppableId;
-    const sourceTasks = [...groupedTasks[sourceCategory]];
+
+    // Reorder tasks
+    const sourceTasks = Array.from(groupedTasks[sourceCategory]);
     const [removed] = sourceTasks.splice(source.index, 1);
-    const destinationTasks = [...groupedTasks[destinationCategory]];
+    const destinationTasks = Array.from(groupedTasks[destinationCategory]);
     destinationTasks.splice(destination.index, 0, removed);
 
-    // Update state with reordered tasks
     setGroupedTasks((prevState) => ({
       ...prevState,
       [sourceCategory]: sourceTasks,
