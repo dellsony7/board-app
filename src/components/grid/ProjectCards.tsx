@@ -24,7 +24,7 @@ export default function SwimlaneDashboard() {
 
   React.useEffect(() => {
     axios
-      .get("/fake-db/tasks.json") // Adjust the path to your data
+      .get("/fake-db/tasks.json")
       .then((response) => {
         setTasks(response.data);
       })
