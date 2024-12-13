@@ -125,15 +125,41 @@ export default function SwimlaneDashboard() {
     {} as Record<string, { id: number; title: string; status: string }[]>
   );
 
+    const getBackgroundColor = (name: string) => {
+      switch (name) {
+        case "To do":
+          return "#f0f4ff";
+        case "In Progress":
+          return "#FFA800";
+        case "Approved":
+          return "#AEE753";
+        case "Reject":
+          return "#F90430";
+        default:
+          return "#f0f4ff"; // Default color
+      }
+    };
   return (
     <Box sx={{ boxShadow: "none", width: "100%" }}>
       <Grid container spacing={0}>
         {["To Do", "In Progress", "Approved", "Reject"].map((status) => (
           <Grid key={status} item xs={12} sm={6} md={3} padding={1}>
             <Item>
-              <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-                {status}
-              </Typography>
+        
+              <Typography
+                        sx={{
+                          display: "inline-block",
+                          backgroundColor: getBackgroundColor(status),
+                          color: "#333",
+                          padding: "3px 16px",
+                          fontSize: "0.7rem",
+                          borderRadius: 5,
+                          textAlign: "center", 
+                          width: "100%", 
+                        }}
+                      >
+                        {status}
+                      </Typography>
               <Grid container spacing={1} direction="column">
                 {categorizedTasks[status]?.map((task) => (
                   <Grid key={task.id} item xs={12}>
