@@ -1,150 +1,101 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import { Card, CardContent, Typography, Paper } from "@mui/material";
-import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import { Card, CardContent, Typography } from "@mui/material";
 import axios from "axios";
+import CardHeader from "./CardHeader";
 
+// Styled Paper Item (for layout)
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "center",
   color: theme.palette.text.secondary,
-  ...theme.applyStyles("dark", {
-    backgroundColor: "#1A2027",
-  }),
 }));
 
-export default function SwimlaneDashboard() {
-  const [tasks, setTasks] = React.useState<
-    { id: number; title: string; status: string }[]
-  >([]);
+// Define interface for task
+interface AssignedPerson {
+  name: string;
+  avatar: string;
+}
 
+interface Task {
+  id: number;
+  title: string;
+  type: string;
+  status: string;
+  priority: string;
+  assigned: AssignedPerson[];
+  dueDate: string;
+  linked: string;
+}
+
+// GroupedTasks will be an object where keys are status strings and values are arrays of Task objects
+interface GroupedTasks {
+  [key: string]: Task[];
+}
+
+export default function AutoGrid() {
+  const [tasks, setTasks] = React.useState<Task[]>([]); // State for raw tasks
+  const [groupedTasks, setGroupedTasks] = React.useState<GroupedTasks>({}); // State for grouped tasks
+
+  // Fetch data and group tasks by status
   React.useEffect(() => {
     axios
-      .get("/fake-db/tasks.json")
+      .get("/fake-db/tasks.json") // Adjust the URL if necessary
       .then((response) => {
-        setTasks(response.data);
+        const fetchedTasks: Task[] = response.data;
+
+        // Group tasks by their status
+        const grouped = fetchedTasks.reduce((acc: GroupedTasks, task: Task) => {
+          if (!acc[task.status]) {
+            acc[task.status] = [];
+          }
+          acc[task.status].push(task); // Add the whole task, not just title and id
+          return acc;
+        }, {});
+
+        setGroupedTasks(grouped); // Set grouped tasks
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
   }, []);
 
-  const handleStatusChange = (taskId: number, newStatus: string) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === taskId ? { ...task, status: newStatus } : task
-      )
-    );
-  };
-
-  const categorizedTasks = tasks.reduce(
-    (acc, task) => {
-      if (!acc[task.status]) {
-        acc[task.status] = [];
-      }
-      acc[task.status].push(task);
-      return acc;
-    },
-    {} as Record<string, { id: number; title: string; status: string }[]>
-  );
-
-  const getBackgroundColor = (name: string) => {
-    switch (name) {
-      case "To do":
-        return "#f0f4ff";
-      case "In Progress":
-        return "#FFA800";
-      case "Approved":
-        return "#AEE753";
-      case "Reject":
-        return "#F90430";
-      default:
-        return "#f0f4ff"; // Default color
-    }
-  };
-
-  const handleDragEnd = (result: any) => {
-    const { destination, source } = result;
-    if (!destination) return;
-
-    // Reordering the tasks within the same status category
-    const newTasks = [...tasks];
-    const [movedTask] = newTasks.splice(source.index, 1);
-    movedTask.status = destination.droppableId;
-    newTasks.splice(destination.index, 0, movedTask);
-
-    setTasks(newTasks); // Update the state with reordered tasks
-  };
-
   return (
     <Box sx={{ boxShadow: "none", width: "100%" }}>
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <Grid container spacing={0}>
-          {["To Do", "In Progress", "Approved", "Reject"].map((status) => (
-            <Grid key={status} item xs={12} sm={6} md={3} padding={1}>
-              <Item>
-                <Typography
-                  sx={{
-                    display: "inline-block",
-                    backgroundColor: getBackgroundColor(status),
-                    color: "#333",
-                    padding: "3px 16px",
-                    fontSize: "0.7rem",
-                    borderRadius: 5,
-                    textAlign: "center",
-                    width: "100%",
-                  }}
-                >
-                  {status}
-                </Typography>
-
-                <Droppable droppableId={status}>
-                  {(provided) => (
-                    <Grid
-                      container
-                      spacing={1}
-                      direction="column"
-                      ref={provided.innerRef}
-                      {...provided.droppableProps}
-                    >
-                      {categorizedTasks[status]?.map((task, index) => (
-                        <Draggable
-                          key={task.id}
-                          draggableId={String(task.id)}
-                          index={index}
-                        >
-                          {(provided) => (
-                            <Grid
-                              item
-                              xs={12}
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                            >
-                              <Card sx={{ margin: 1 }}>
-                                <CardContent>
-                                  <Typography variant="h6">
-                                    {task.title}
-                                  </Typography>
-                                </CardContent>
-                              </Card>
-                            </Grid>
-                          )}
-                        </Draggable>
-                      ))}
-                      {provided.placeholder}
-                    </Grid>
-                  )}
-                </Droppable>
-              </Item>
+      <Grid container spacing={3}>
+   
+        {Object.entries(groupedTasks).map(([category, tasks]) => (
+          <Grid key={category} item xs={12} sm={6} md={3} padding={1}>
+            <CardHeader name={category} />
+            <Grid container spacing={1}>
+              {tasks.map((task) => (
+                <Grid key={task.id} item xs={12}>
+                  <Card sx={{ margin: 1 }}>
+                    <CardContent sx={{ textAlign: "left" }}>
+                      <Typography
+                        gutterBottom
+                        sx={{
+                          color: "text.secondary",
+                          fontSize: 14,
+                          textAlign: "left",
+                        }}
+                      >
+                        {task.type}
+                      </Typography>
+                      <Typography variant="h6">{task.title}</Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
-      </DragDropContext>
+          </Grid>
+        ))}
+      </Grid>
     </Box>
   );
 }

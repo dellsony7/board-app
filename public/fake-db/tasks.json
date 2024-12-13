@@ -1,12 +1,212 @@
-
 [
-  { "id": 1, "title": "Task 1", "status": "To Do" },
-  { "id": 2, "title": "Task 2", "status": "To Do" },
-  { "id": 3, "title": "Task 3", "status": "To Do" },
-  { "id": 4, "title": "Task A", "status": "In Progress" },
-  { "id": 5, "title": "Task B", "status": "In Progress" },
-  { "id": 6, "title": "Task X", "status": "Approved" },
-  { "id": 7, "title": "Task Y", "status": "Approved" },
-  { "id": 8, "title": "Task Z", "status": "Reject" },
-  { "id": 9, "title": "Task W", "status": "Reject" }
+  {
+    "id": 1,
+    "title": "Task 1",
+    "type": "Design",
+    "status": "To Do",
+    "priority": "High",
+    "assigned": [
+      { "name": "Ruwan", "avatar": "" },
+      { "name": "Sanjaya", "avatar": "" }
+    ],
+    "dueDate": "10 March, 2022",
+    "linked": "0"
+  },
+  {
+    "id": 2,
+    "title": "Task 2",
+    "status": "To Do",
+    "type": "Design System",
+    "priority": "Medium",
+    "assigned": [
+      { "name": "Dilrukshi", "avatar": "" },
+      { "name": "Janith", "avatar": "" }
+    ],
+    "dueDate": "18 March, 2022",
+    "linked": "1"
+  },
+  {
+    "id": 3,
+    "title": "Task 3",
+    "type": "Speech",
+    "status": "To Do",
+    "priority": "Low",
+    "assigned": [
+      { "name": "Kasun", "avatar": "" },
+      { "name": "Thilina", "avatar": "" }
+    ],
+    "dueDate": "5 April, 2022",
+    "linked": "2"
+  },
+  {
+    "id": 4,
+    "title": "Task 4",
+    "status": "To Do",
+    "type": "Wireframe",
+    "priority": "High",
+    "assigned": [
+      { "name": "Nishan", "avatar": "" },
+      { "name": "Sumali", "avatar": "" }
+    ],
+    "dueDate": "12 April, 2022",
+    "linked": "6"
+  },
+  {
+    "id": 5,
+    "title": "Task 5",
+    "status": "In Progress",
+    "type": "Wireframe",
+    "priority": "Low",
+    "assigned": [
+      { "name": "Nimal", "avatar": "" },
+      { "name": "Kamal", "avatar": "" },
+      { "name": "Sunil", "avatar": "" }
+    ],
+    "dueDate": "22 April, 2022",
+    "linked": "5"
+  },
+  {
+    "id": 6,
+    "title": "Task 6",
+    "status": "In Progress",
+    "type": "Wireframe",
+    "priority": "High",
+    "assigned": [
+      { "name": "Samantha", "avatar": "" },
+      { "name": "Arjuna", "avatar": "" }
+    ],
+    "dueDate": "15 May, 2022",
+    "linked": "3"
+  },
+  {
+    "id": 7,
+    "title": "Task 7",
+    "status": "In Progress",
+    "type": "Wireframe",
+    "priority": "Medium",
+    "assigned": [
+      { "name": "Chathura", "avatar": "" },
+      { "name": "Dilini", "avatar": "" },
+      { "name": "Praveen", "avatar": "" }
+    ],
+    "dueDate": "10 June, 2022",
+    "linked": "8"
+  },
+  {
+    "id": 8,
+    "title": "Task 8",
+    "status": "In Progress",
+    "type": "Wireframe",
+    "priority": "High",
+    "assigned": [
+      { "name": "Nishantha", "avatar": "" },
+      { "name": "Suranga", "avatar": "" }
+    ],
+    "dueDate": "5 July, 2022",
+    "linked": "2"
+  },
+  {
+    "id": 9,
+    "title": "Task 9",
+    "status": "Approved",
+    "type": "Wireframe",
+    "priority": "Low",
+    "assigned": [
+      { "name": "Lakshmi", "avatar": "" },
+      { "name": "Anura", "avatar": "" }
+    ],
+    "dueDate": "12 August, 2022",
+    "linked": "4"
+  },
+  {
+    "id": 10,
+    "title": "Task 10",
+    "type": "Wireframe",
+    "status": "Approved",
+    "priority": "Medium",
+    "assigned": [
+      { "name": "Priya", "avatar": "" },
+      { "name": "Arun", "avatar": "" }
+    ],
+    "dueDate": "20 August, 2022",
+    "linked": "7"
+  },
+  {
+    "id": 11,
+    "title": "Task 11",
+    "status": "Approved",
+    "type": "Wireframe",
+    "priority": "High",
+    "assigned": [
+      { "name": "Deepika", "avatar": "" },
+      { "name": "Charitha", "avatar": "" }
+    ],
+    "dueDate": "1 September, 2022",
+    "linked": "9"
+  },
+  {
+    "id": 12,
+    "title": "Task 12",
+    "status": "Approved",
+    "type": "Wireframe",
+    "priority": "Low",
+    "assigned": [
+      { "name": "Naveen", "avatar": "" },
+      { "name": "Dilshan", "avatar": "" }
+    ],
+    "dueDate": "15 September, 2022",
+    "linked": "10"
+  },
+  {
+    "id": 13,
+    "title": "Task 13",
+    "status": "Reject",
+    "type": "Wireframe",
+    "priority": "High",
+    "assigned": [
+      { "name": "Rashmi", "avatar": "" },
+      { "name": "Ishan", "avatar": "" }
+    ],
+    "dueDate": "5 October, 2022",
+    "linked": "11"
+  },
+  {
+    "id": 14,
+    "title": "Task 14",
+    "status": "Reject",
+    "type": "Wireframe",
+    "priority": "Medium",
+    "assigned": [
+      { "name": "Tharindu", "avatar": "" },
+      { "name": "Manjula", "avatar": "" }
+    ],
+    "dueDate": "10 October, 2022",
+    "linked": "12"
+  },
+  {
+    "id": 15,
+    "title": "Task 15",
+    "status": "Reject",
+    "type": "Wireframe",
+    "priority": "Low",
+    "assigned": [
+      { "name": "Shalini", "avatar": "" },
+      { "name": "Roshan", "avatar": "" }
+    ],
+    "dueDate": "20 October, 2022",
+    "linked": "13"
+  },
+  {
+    "id": 16,
+    "title": "Task 16",
+    "status": "Reject",
+    "type": "Wireframe",
+    "priority": "High",
+    "assigned": [
+      { "name": "Amal", "avatar": "" },
+      { "name": "Gayan", "avatar": "" }
+    ],
+    "dueDate": "30 October, 2022",
+    "linked": "14"
+  }
 ]
