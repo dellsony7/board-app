@@ -10,7 +10,11 @@
       { "name": "Sanjaya", "avatar": "" }
     ],
     "dueDate": "10 March, 2022",
-    "linked": "0"
+    "linked": "0",
+    "image": {
+      "src": "https://example.com/images/task1.jpg",
+      "alt": "Task 1 preview image"
+    }
   },
   {
     "id": 2,
@@ -23,7 +27,11 @@
       { "name": "Janith", "avatar": "" }
     ],
     "dueDate": "18 March, 2022",
-    "linked": "1"
+    "linked": "1",
+    "image": {
+      "src": "https://example.com/images/task2.jpg",
+      "alt": "Task 2 preview image"
+    }
   },
   {
     "id": 3,
@@ -36,7 +44,11 @@
       { "name": "Thilina", "avatar": "" }
     ],
     "dueDate": "5 April, 2022",
-    "linked": "2"
+    "linked": "2",
+    "image": {
+      "src": "https://example.com/images/task3.jpg",
+      "alt": "Task 3 preview image"
+    }
   },
   {
     "id": 4,
@@ -49,7 +61,11 @@
       { "name": "Sumali", "avatar": "" }
     ],
     "dueDate": "12 April, 2022",
-    "linked": "6"
+    "linked": "6",
+    "image": {
+      "src": "https://example.com/images/task4.jpg",
+      "alt": "Task 4 preview image"
+    }
   },
   {
     "id": 5,
@@ -63,7 +79,11 @@
       { "name": "Sunil", "avatar": "" }
     ],
     "dueDate": "22 April, 2022",
-    "linked": "5"
+    "linked": "5",
+    "image": {
+      "src": "https://example.com/images/task5.jpg",
+      "alt": "Task 5 preview image"
+    }
   },
   {
     "id": 6,
@@ -76,7 +96,11 @@
       { "name": "Arjuna", "avatar": "" }
     ],
     "dueDate": "15 May, 2022",
-    "linked": "3"
+    "linked": "3",
+    "image": {
+      "src": "https://example.com/images/task6.jpg",
+      "alt": "Task 6 preview image"
+    }
   },
   {
     "id": 7,
@@ -90,7 +114,11 @@
       { "name": "Praveen", "avatar": "" }
     ],
     "dueDate": "10 June, 2022",
-    "linked": "8"
+    "linked": "8",
+    "image": {
+      "src": "https://example.com/images/task7.jpg",
+      "alt": "Task 7 preview image"
+    }
   },
   {
     "id": 8,
@@ -103,7 +131,11 @@
       { "name": "Suranga", "avatar": "" }
     ],
     "dueDate": "5 July, 2022",
-    "linked": "2"
+    "linked": "2",
+    "image": {
+      "src": "https://example.com/images/task8.jpg",
+      "alt": "Task 8 preview image"
+    }
   },
   {
     "id": 9,
@@ -116,7 +148,11 @@
       { "name": "Anura", "avatar": "" }
     ],
     "dueDate": "12 August, 2022",
-    "linked": "4"
+    "linked": "4",
+    "image": {
+      "src": "https://example.com/images/task9.jpg",
+      "alt": "Task 9 preview image"
+    }
   },
   {
     "id": 10,
@@ -129,7 +165,11 @@
       { "name": "Arun", "avatar": "" }
     ],
     "dueDate": "20 August, 2022",
-    "linked": "7"
+    "linked": "7",
+    "image": {
+      "src": "https://example.com/images/task10.jpg",
+      "alt": "Task 10 preview image"
+    }
   },
   {
     "id": 11,
@@ -142,7 +182,11 @@
       { "name": "Charitha", "avatar": "" }
     ],
     "dueDate": "1 September, 2022",
-    "linked": "9"
+    "linked": "9",
+    "image": {
+      "src": "https://example.com/images/task11.jpg",
+      "alt": "Task 11 preview image"
+    }
   },
   {
     "id": 12,
@@ -152,10 +196,18 @@
     "priority": "Low",
     "assigned": [
       { "name": "Naveen", "avatar": "" },
+      { "name": "Dilshan", "avatar": "" },
+      { "name": "Dilshan", "avatar": "" },
+      { "name": "Naveen", "avatar": "" },
+      { "name": "Dilshan", "avatar": "" },
       { "name": "Dilshan", "avatar": "" }
     ],
     "dueDate": "15 September, 2022",
-    "linked": "10"
+    "linked": "10",
+    "image": {
+      "src": "https://example.com/images/task12.jpg",
+      "alt": "Task 12 preview image"
+    }
   },
   {
     "id": 13,
@@ -164,11 +216,18 @@
     "type": "Wireframe",
     "priority": "High",
     "assigned": [
-      { "name": "Rashmi", "avatar": "" },
-      { "name": "Ishan", "avatar": "" }
+      { "name": "Naveen", "avatar": "" },
+      { "name": "Dilshan", "avatar": "" },
+      { "name": "Dilshan", "avatar": "" },
+      { "name": "Dilshan", "avatar": "" },
+      { "name": "Dilshan", "avatar": "" }
     ],
     "dueDate": "5 October, 2022",
-    "linked": "11"
+    "linked": "11",
+    "image": {
+      "src": "https://example.com/images/task13.jpg",
+      "alt": "Task 13 preview image"
+    }
   },
   {
     "id": 14,
@@ -177,11 +236,16 @@
     "type": "Wireframe",
     "priority": "Medium",
     "assigned": [
-      { "name": "Tharindu", "avatar": "" },
-      { "name": "Manjula", "avatar": "" }
+      { "name": "Naveen", "avatar": "" },
+      { "name": "Dilshan", "avatar": "" },
+      { "name": "Dilshan", "avatar": "" }
     ],
     "dueDate": "10 October, 2022",
-    "linked": "12"
+    "linked": "12",
+    "image": {
+      "src": "https://example.com/images/task14.jpg",
+      "alt": "Task 14 preview image"
+    }
   },
   {
     "id": 15,
@@ -194,7 +258,11 @@
       { "name": "Roshan", "avatar": "" }
     ],
     "dueDate": "20 October, 2022",
-    "linked": "13"
+    "linked": "13",
+    "image": {
+      "src": "https://example.com/images/task15.jpg",
+      "alt": "Task 15 preview image"
+    }
   },
   {
     "id": 16,
@@ -207,6 +275,10 @@
       { "name": "Gayan", "avatar": "" }
     ],
     "dueDate": "30 October, 2022",
-    "linked": "14"
+    "linked": "14",
+    "image": {
+      "src": "https://example.com/images/task16.jpg",
+      "alt": "Task 16 preview image"
+    }
   }
 ]
