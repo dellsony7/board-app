@@ -1,10 +1,19 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  CardMedia,
+} from "@mui/material";
 import axios from "axios";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult,
+} from "@hello-pangea/dnd";
 
 import CardBody from "../card-components/CardBody";
 import CardFooter from "../card-components/CardFooter";
@@ -19,6 +28,7 @@ interface Image {
   alt: string;
   src: string;
 }
+
 interface Task {
   id: number;
   title: string;
@@ -36,15 +46,16 @@ interface GroupedTasks {
   [key: string]: Task[];
 }
 
-export default function ProjectCard() {
-  const [tasks, setTasks] = React.useState<Task[]>([]);
+export default function AutoGrid() {
   const [groupedTasks, setGroupedTasks] = React.useState<GroupedTasks>({});
+
   React.useEffect(() => {
     axios
       .get("/fake-db/tasks.json")
       .then((response) => {
         const fetchedTasks: Task[] = response.data;
 
+        // Group tasks by status
         const grouped = fetchedTasks.reduce((acc: GroupedTasks, task: Task) => {
           if (!acc[task.status]) {
             acc[task.status] = [];
@@ -60,11 +71,14 @@ export default function ProjectCard() {
       });
   }, []);
 
-  const handleDragEnd = (result: any) => {
+  // Handle the drag end event
+  const handleDragEnd = (result: DropResult) => {
     const { destination, source } = result;
+
+    // If dropped outside the droppable area, do nothing
     if (!destination) return;
 
-    // If the task is dropped in the same position, no need to change anything
+    // If the item is dropped in the same position, no need to do anything
     if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
@@ -72,15 +86,18 @@ export default function ProjectCard() {
       return;
     }
 
-    // Reorder tasks in the specific category (status)
     const sourceCategory = source.droppableId;
     const destinationCategory = destination.droppableId;
-    const sourceTasks = [...groupedTasks[sourceCategory]];
+
+    // Reorder tasks within the source category
+    const sourceTasks = Array.from(groupedTasks[sourceCategory]);
     const [removed] = sourceTasks.splice(source.index, 1);
-    const destinationTasks = [...groupedTasks[destinationCategory]];
+
+    // Reorder tasks within the destination category
+    const destinationTasks = Array.from(groupedTasks[destinationCategory]);
     destinationTasks.splice(destination.index, 0, removed);
 
-    // Update state with reordered tasks
+    // Update the grouped tasks state
     setGroupedTasks((prevState) => ({
       ...prevState,
       [sourceCategory]: sourceTasks,
@@ -90,46 +107,77 @@ export default function ProjectCard() {
 
   return (
     <Box sx={{ boxShadow: "none", width: "100%" }}>
-      <Grid container spacing={3}>
-        {Object.entries(groupedTasks).map(([category, tasks]) => (
-          <Grid key={category} item xs={12} sm={6} md={3} padding={1}>
-            <CardHeader name={category} />
-            <Grid container spacing={1}>
-              {tasks.map((task) => (
-                <Grid key={task.id} item xs={12}>
-                  <Card sx={{ margin: 1 }}>
-                    <CardContent sx={{ textAlign: "left" }}>
-                      <Typography
-                        gutterBottom
-                        sx={{
-                          color: "text.secondary",
-                          fontSize: 14,
-                          textAlign: "left",
-                        }}
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <Grid container spacing={3}>
+          {Object.entries(groupedTasks).map(([category, tasks]) => (
+            <Grid key={category} item xs={12} sm={6} md={3} padding={1}>
+              <CardHeader name={category} />
+              <Droppable droppableId={category}>
+                {(provided) => (
+                  <Grid
+                    container
+                    spacing={1}
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                  >
+                    {tasks.map((task, index) => (
+                      <Draggable
+                        key={task.id}
+                        draggableId={task.id.toString()}
+                        index={index}
                       >
-                        {task.type}
-                      </Typography>
-                      <Typography variant="h6">{task.title}</Typography>
-                    </CardContent>
-                    <CardContent>
-                      <CardBody
-                        assigned={task.assigned}
-                        priority={task.priority}
-                      />
-                      <CardMedia
-                        component="img"
-                        height="120"
-                        image="/images/images.png"
-                      />
-                    </CardContent>
-                    <CardFooter linked={task.linked} dueDate={task.dueDate} />
-                  </Card>
-                </Grid>
-              ))}
+                        {(provided) => (
+                          <Grid
+                            item
+                            xs={12}
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <Card sx={{ margin: 1 }}>
+                              <CardContent sx={{ textAlign: "left" }}>
+                                <Typography
+                                  gutterBottom
+                                  sx={{
+                                    color: "text.secondary",
+                                    fontSize: 14,
+                                    textAlign: "left",
+                                  }}
+                                >
+                                  {task.type}
+                                </Typography>
+                                <Typography variant="h6">
+                                  {task.title}
+                                </Typography>
+                              </CardContent>
+                              <CardContent>
+                                <CardBody
+                                  assigned={task.assigned}
+                                  priority={task.priority}
+                                />
+                                <CardMedia
+                                  component="img"
+                                  height="120"
+                                  image="/images/images.png"
+                                />
+                              </CardContent>
+                              <CardFooter
+                                linked={task.linked}
+                                dueDate={task.dueDate}
+                              />
+                            </Card>
+                          </Grid>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </Grid>
+                )}
+              </Droppable>
             </Grid>
-          </Grid>
-        ))}
-      </Grid>
+          ))}
+        </Grid>
+      </DragDropContext>
     </Box>
   );
 }

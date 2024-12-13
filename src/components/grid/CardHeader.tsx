@@ -37,11 +37,10 @@ const CardHeader: React.FC<CardHeaderProps> = ({ name }) => {
             display: "inline-block",
             backgroundColor: getBackgroundColor(name),
             color: "#333",
-            padding: "3px 16px",
+            padding: "5px 16px",
             fontSize: "0.7rem",
             borderRadius: 5,
-            textAlign: "center", // Centering the text
-            width: "100%", // Ensuring the text spans the full width available
+            textAlign: "center",
           }}
         >
           {name}
